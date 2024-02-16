@@ -1,5 +1,7 @@
 // import 'dart:developer';
 
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart' show debugPrint;
 
@@ -77,5 +79,42 @@ class DioClient {
       onReceiveProgress: onReceiveProgress,
     );
     return response.data;
+  }
+
+  Future<Map<String, dynamic>> uploadWithFields(
+    String path,
+    File images, {
+    Map<String, dynamic>? fields,
+    CancelToken? cancelToken,
+    Options? options,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final FormData formData = FormData();
+
+    formData.files.add(MapEntry(
+      'client_image',
+      await MultipartFile.fromFile(images.path),
+    ));
+
+    if (fields != null) {
+      fields.forEach((key, value) {
+        formData.fields.add(MapEntry(key, value.toString()));
+      });
+    }
+
+    try {
+      final Response response = await _dio.post(
+        path,
+        data: formData,
+        options: options,
+        cancelToken: cancelToken,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceiveProgress,
+      );
+      return response.data;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

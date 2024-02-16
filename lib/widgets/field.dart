@@ -20,6 +20,7 @@ Widget customTextField({
   Widget? suffixIcon,
   int maxLines = 1,
   Color? color,
+  Widget? child,
 }) {
   return Container(
     height: height,
@@ -32,37 +33,43 @@ Widget customTextField({
     padding: const EdgeInsets.symmetric(
       horizontal: 10,
     ),
-    child: TextField(
-      // textAlignVertical: TextAlignVertical.center,
-      textAlign: TextAlign.left,
-      readOnly: isReadOnly,
-      obscureText: isPassword,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextField(
+          // textAlignVertical: TextAlignVertical.center,
+          textAlign: TextAlign.left,
+          readOnly: isReadOnly,
+          obscureText: isPassword,
 
-      controller: controller,
-      keyboardType: keyBoard,
-      maxLines: maxLines,
-      style: TextStyle(fontSize: fontSize, fontWeight: fontWeight),
+          controller: controller,
+          keyboardType: keyBoard,
+          maxLines: maxLines,
+          style: TextStyle(fontSize: fontSize, fontWeight: fontWeight),
 
-      decoration: InputDecoration(
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-        suffixText: suffixText,
-        contentPadding: (prefixIcon != null || suffixIcon != null)
-            ? const EdgeInsets.only(top: 15)
-            : EdgeInsets.zero,
-        suffixStyle: TextStyle(
-          fontSize: suffixfontSize,
-          fontWeight: fontWeight,
-          color: suffixColor,
+          decoration: InputDecoration(
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
+            suffixText: suffixText,
+            contentPadding: (prefixIcon != null || suffixIcon != null)
+                ? const EdgeInsets.only(top: 15)
+                : EdgeInsets.zero,
+            suffixStyle: TextStyle(
+              fontSize: suffixfontSize,
+              fontWeight: fontWeight,
+              color: suffixColor,
+            ),
+            hintStyle: TextStyle(
+                fontSize: fontSize,
+                color: const Color(
+                  0xFFABB3BB,
+                )),
+            hintText: hintText,
+            border: InputBorder.none,
+          ),
         ),
-        hintStyle: TextStyle(
-            fontSize: fontSize,
-            color: const Color(
-              0xFFABB3BB,
-            )),
-        hintText: hintText,
-        border: InputBorder.none,
-      ),
+        if (child != null) child,
+      ],
     ),
   );
 }
