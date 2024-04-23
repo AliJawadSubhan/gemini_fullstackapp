@@ -4,8 +4,8 @@ A sleek fullstack application utilizing Node.js for the backend and Flutter for 
 
 ## Features
 
-- **Node.js Backend:** Robust and scalable backend architecture.
-- **Flutter Frontend:** Smooth and intuitive user interface.
+- **Node.js Backend:** Basic Nodejs usage.
+- **Flutter Frontend:** Smooth and simple user interface.
 - **Gemini Integration:** Leveraging Gemini for advanced features.
 - **Dynamic API Handling:** Adapts based on image presence, meaning multiple API's in work. 
 
